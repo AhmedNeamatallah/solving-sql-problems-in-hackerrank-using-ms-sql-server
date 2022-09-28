@@ -1,0 +1,5 @@
+SELECT c1.name 
+FROM city as c1
+INNER JOIN country as c2 
+ON c1.countrycode = c2.code
+WHERE continent = 'Africa';

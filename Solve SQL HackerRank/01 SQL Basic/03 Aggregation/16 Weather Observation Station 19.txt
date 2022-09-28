@@ -1,0 +1,6 @@
+Formula: √((a-b)^2+(c-d)^2)
+
+
+SELECT CAST(SQRT(ABS(POWER((MIN(lat_n) - MAX(lat_n)),2) 
+                     + POWER((MIN(long_w) - MAX(long_w)),2))) AS DECIMAL(14,4))
+ FROM station ;

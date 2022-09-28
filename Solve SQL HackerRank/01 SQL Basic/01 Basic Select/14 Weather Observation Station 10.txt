@@ -1,0 +1,9 @@
+SELECT DISTINCT city 
+FROM station 
+WHERE city NOT LIKE '%[aeiou]';
+
+OR 
+
+SELECT DISTINCT city 
+FROM station 
+WHERE city NOT LIKE '%[!aeiou]';

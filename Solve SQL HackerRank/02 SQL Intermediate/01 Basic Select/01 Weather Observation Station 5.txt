@@ -1,0 +1,3 @@
+SELECT TOP 1 * FROM ( SELECT City, LEN(City) Length FROM Station )A ORDER BY Length ASC, City ASC;
+
+SELECT TOP 1 * FROM ( SELECT City, LEN(City) Length FROM Station )A ORDER BY Length DESC, City ASC;

@@ -1,0 +1,17 @@
+WITH table1 AS(
+    SELECT h.hacker_id AS id, MIN(h.name) AS name, COUNT(h.hacker_id) AS n_challenge 
+    FROM Hackers AS h
+    INNER JOIN Challenges AS c
+    ON h.hacker_id = c.hacker_id
+    GROUP BY h.hacker_id
+),
+table2 AS(
+    SELECT n_challenge 
+    FROM table1
+    WHERE n_challenge != (SELECT MAX(n_challenge) FROM table1)
+    GROUP BY n_challenge
+    HAVING COUNT(n_challenge) > 1 
+)
+SELECT * FROM table1
+WHERE n_challenge NOT IN (SELECT * FROM table2)
+ORDER BY n_challenge DESC, id;

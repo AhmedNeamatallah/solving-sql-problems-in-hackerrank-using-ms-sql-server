@@ -1,0 +1,13 @@
+
+SELECT W.id, WPRO.age, W.coins_needed, W.power
+FROM Wands AS W 
+INNER JOIN Wands_Property AS WPRO 
+ON W.code = WPRO.code
+INNER JOIN(SELECT code, MIN(coins_needed) AS minCoin, power 
+           FROM Wands
+           GROUP BY code, power) AS WM
+ON W.code = WM.code
+AND w.coins_needed = WM.minCoin 
+AND w.power = WM.power
+WHERE WPRO.is_evil = 0 
+ORDER BY W.power DESC, age DESC;

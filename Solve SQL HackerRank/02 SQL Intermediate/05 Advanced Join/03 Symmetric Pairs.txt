@@ -1,0 +1,12 @@
+SELECT DISTINCT x, y
+FROM(
+    SELECT x, y, row_number() over(ORDER BY x,y) AS aa
+    FROM functions)  AS f1
+WHERE f1.x IN (
+    SELECT y
+    FROM (SELECT x,y, row_number() over(ORDER BY x,y) AS  aa
+          FROM functions ) AS f2
+    WHERE f2.x=f1.y
+    AND f1.aa<>f2.aa)
+AND x<=y
+ORDER BY x ASC;

@@ -1,0 +1,12 @@
+
+SELECT D1.Start_Date, D2.End_Date
+FROM
+(SELECT Start_Date, ROW_NUMBER() OVER (ORDER BY Start_Date)'RowNumber'
+FROM Projects
+WHERE Start_Date NOT IN (SELECT End_date FROM Projects)) AS D1
+FULL OUTER JOIN
+(SELECT  End_Date, ROW_NUMBER() OVER (ORDER BY End_Date)'RowNumber'
+FROM Projects
+WHERE End_Date NOT IN (SELECT Start_date FROM Projects)) AS D2
+ON D1.RowNumber = D2.RowNumber
+ORDER BY DATEDIFF(DAY,D1.Start_Date,D2.End_Date), D1.Start_Date;

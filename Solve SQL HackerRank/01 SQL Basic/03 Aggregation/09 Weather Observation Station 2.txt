@@ -1,0 +1,3 @@
+SELECT 
+        CAST((SUM(Lat_N)) AS NUMERIC (15,2)) AS lat, CAST((SUM(Long_w)) AS  NUMERIC (15,2)) AS lon
+FROM station;

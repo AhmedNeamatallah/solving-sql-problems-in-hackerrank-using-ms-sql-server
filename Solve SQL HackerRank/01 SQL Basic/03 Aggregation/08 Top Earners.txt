@@ -1,0 +1,7 @@
+SELECT TOP 1 MAX(earnings), COUNT(employee_id)
+FROM (
+     SELECT *, (months * salary) AS earnings 
+     FROM Employee
+     ) AS TempTable  
+GROUP BY (earnings)
+ORDER BY (earnings) DESC; 

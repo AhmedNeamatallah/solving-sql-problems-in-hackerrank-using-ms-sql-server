@@ -1,0 +1,17 @@
+SELECT a.company_code, b.founder, 
+COUNT(DISTINCT a.lead_manager_code) AS lead_manager_code ,
+COUNT(DISTINCT a.senior_manager_code) AS senior_manager_code ,
+COUNT(DISTINCT a.manager_code) AS manager_code,
+COUNT(DISTINCT a.employee_code) AS employee_code
+FROM (
+        SELECT * FROM employee 
+        UNION ALL
+        SELECT *, NULL FROM Manager  
+        UNION ALL
+        SELECT *, NULL, NULL FROM Senior_Manager  
+        UNION ALL
+        SELECT *, NULL, NULL, NULL FROM Lead_Manager 
+) AS a, Company AS b 
+WHERE a.company_code = b.company_code
+GROUP BY a.company_code, b.founder 
+ORDER BY a.company_code

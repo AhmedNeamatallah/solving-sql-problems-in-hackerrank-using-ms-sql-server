@@ -1,0 +1,41 @@
+WITH n1(n) 
+AS 
+(
+  SELECT 1 UNION ALL SELECT 1                 -- 2 rows
+),
+n2(n) 
+AS 
+(
+  SELECT 1 FROM n1 AS x CROSS JOIN n1 AS y    -- 4 rows
+), 
+n3(n) 
+AS 
+(
+  SELECT 1 FROM n2 AS x CROSS JOIN n2 AS y    -- 16 rows
+),
+n4(n) 
+AS 
+(
+  SELECT 1 FROM n3 AS x CROSS JOIN n3 AS y CROSS JOIN n3 AS z    -- 4096 rows, all with value 1
+),
+ids(n) 
+AS 
+( -- Add a unique id to each row
+  SELECT ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) FROM n4  
+),
+thousandOdd 
+AS
+( -- Know that 2 is first prime and all even numbers can be quickly discarded 
+  -- Reduces the CPU time of the O(n^2) SELECT below by 50%
+  SELECT TOP(500) n 
+    FROM ids
+   WHERE n = 2 OR n % 2 = 1 AND n > 1
+)
+SELECT STRING_AGG (n, '&') AS 'primeList'
+  FROM thousandOdd
+  WHERE NOT EXISTS ( -- Check all the numbers up to the one we have found so far, Note performance O(n^2)
+                    SELECT 1 
+                      FROM thousandOdd AS checkList
+                      WHERE checkList.n < thousandOdd.n 
+                        AND thousandOdd.n % checkList.n = 0
+                  );

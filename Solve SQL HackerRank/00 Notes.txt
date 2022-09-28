@@ -1,0 +1,26 @@
+NAME : Ahmed Neamatallah
+Country : Egypt
+LinkedIn : https://www.linkedin.com/in/ahmedneamatallah/
+GitHup : https://github.com/AhmedNeamatallah
+
+                         >>>>>>>>>>>>>>>>>>>>>>>> brief about me<<<<<<<<<<<<<<<<<<<<<<<<
+
+I graduated from the Faculty of Science, Department of Physics and Chemistry.I am currently looking for a job or training
+in the field of data analysis.
+I can use excel, power bi, sql and some Python libraries but I'm still not good at using them>
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Solve SQL in HackerRank Using MS SQL Server  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+>>>>>>>>>>>>>>>>>>>>>>   sql intermediate >>>> advanced join >>>> Interviews    <<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>   sql Advanced >>>> advanced join >>>> 15 Days of Learning SQL    <<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>   sql Advanced >>>> alternative queries >>>> Print Prime Numbers    <<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>   sql Advanced Select >>>> Occupations    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+In these questions I used solutions from discussions to understand them
+And I couldn't solve it properly. So I got the best answer and showed it to you.
+
+----------------------------------------------------------------------
+
+Currently, I know my weaknesses well, and I will invest more time in solving sql exercises to make up for this difference.
+good luck for everbody.

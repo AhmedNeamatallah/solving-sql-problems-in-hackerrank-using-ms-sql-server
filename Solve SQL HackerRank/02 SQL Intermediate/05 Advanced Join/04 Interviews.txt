@@ -1,0 +1,30 @@
+WITH VIEW_CTE AS (
+    SELECT 
+        challenge_id, 
+        SUM(total_views) views, 
+        SUM(total_unique_views) unique_views
+    FROM View_Stats
+    GROUP BY challenge_id
+), SUNMISSION_CTE AS (
+    SELECT 
+        challenge_id, 
+        SUM(total_submissions) submissions, 
+        SUM(total_accepted_submissions) accepted_submissions
+    FROM Submission_Stats
+    GROUP BY challenge_id
+)
+SELECT
+    cn.contest_id,
+    cn.hacker_id,
+    cn.name,
+    SUM(submissions),
+    SUM(accepted_submissions),
+    SUM(views),
+    SUM(unique_views)
+FROM Contests cn
+JOIN Colleges cg ON cn.contest_id = cg.contest_id
+JOIN Challenges ch ON cg.college_id = ch.college_id
+LEFT JOIN VIEW_CTE ve ON ch.challenge_id = ve.challenge_id
+LEFT JOIN SUNMISSION_CTE se ON ch.challenge_id = se.challenge_id
+GROUP BY cn.contest_id, cn.hacker_id, cn.name
+ORDER BY cn.contest_id

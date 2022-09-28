@@ -1,0 +1,11 @@
+SELECT 
+MAX(CASE WHEN o.occupation = 'Doctor' THEN o.name END ) AS doctor,
+MAX(CASE WHEN o.occupation = 'Professor' THEN o.name END ) AS Professor,
+MAX(CASE WHEN o.occupation = 'Singer' THEN o.name END ) AS Singer,
+MAX(CASE WHEN o.occupation = 'Actor' THEN o.name END) AS Actor
+FROM
+(SELECT name, occupation,
+ROW_NUMBER() OVER (PARTITION BY OCCUPATION ORDER BY OCCUPATION,NAME ASC)
+ AS RowNumber
+FROM OCCUPATIONS) AS o
+GROUP BY o.RowNumber;

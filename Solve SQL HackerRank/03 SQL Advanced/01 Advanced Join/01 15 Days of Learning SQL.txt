@@ -1,0 +1,32 @@
+WITH SUBMISSIONS_CTE AS (
+	SELECT
+		ROW_NUMBER() OVER (PARTITION BY submission_date ORDER BY submission_date, COUNT(*) DESC, hacker_id) rn,
+		submission_date,
+		hacker_id
+	FROM Submissions
+	GROUP BY submission_date, hacker_id
+), HACKERS_CTE AS (
+	SELECT
+		submission_date,
+		hacker_id
+	FROM SUBMISSIONS_CTE
+	WHERE submission_date = '2016-03-01'
+	UNION ALL
+	SELECT
+		s.submission_date,
+		s.hacker_id
+	FROM SUBMISSIONS_CTE s, HACKERS_CTE h
+	WHERE s.hacker_id = h.hacker_id
+	AND DATEDIFF(DAY, h.submission_date, s.submission_date) = 1
+)
+SELECT
+    sc.submission_date,
+    COUNT(DISTINCT hc.hacker_id),
+    sc.hacker_id,
+    h.name
+FROM SUBMISSIONS_CTE sc
+JOIN HACKERS_CTE hc ON sc.submission_date = hc.submission_date
+JOIN Hackers h ON sc.hacker_id = h.hacker_id
+WHERE rn = 1
+GROUP BY sc.submission_date, sc.hacker_id, h.name
+ORDER BY sc.submission_date

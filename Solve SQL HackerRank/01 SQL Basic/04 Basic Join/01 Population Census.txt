@@ -1,0 +1,5 @@
+SELECT SUM(C1.population)
+FROM city AS C1
+INNER JOIN country AS C2
+ON c1.countrycode = c2.code
+WHERE continent = 'Asia';
